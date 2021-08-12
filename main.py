@@ -8,6 +8,8 @@ from fastapi.responses import (
 )
 from fastapi.middleware.cors import CORSMiddleware
 
+import members
+
 app = FastAPI()
 
 
@@ -39,3 +41,8 @@ async def middleware(request: Request, call_next):
 @app.get("/")
 async def get_root(request: Request):
     return {"message": "hello, world"}
+
+
+@app.get("/members")
+async def get_members(request: Request):
+    return members.main()
