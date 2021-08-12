@@ -1,6 +1,7 @@
 import tweepy
 import os
 import time
+import json
 
 auth = tweepy.OAuthHandler(os.getenv('TW_CK'), os.getenv('TW_CS'))
 API = tweepy.API(auth)
@@ -9,7 +10,7 @@ API = tweepy.API(auth)
 def main():
     if os.getenv('MEMBER_FETCHED'):
         if float(os.getenv('MEMBER_FETCHED')) + 900 >= time.time():
-            resdict = dict(os.getenv('MEMBER_RESDICT'))
+            resdict = json.loads(os.getenv('MEMBER_RESDICT'))
             return resdict
     resdict = {'users': []}
     for user in tweepy.Cursor(
@@ -22,7 +23,7 @@ def main():
             'description': user.description,
         }
         resdict['users'].append(d)
-    os.environ['MEMBER_RESDICT'] = str(resdict)
+    os.environ['MEMBER_RESDICT'] = json.dumps(resdict)
     os.environ['MEMBER_FETCHED'] = str(time.time())
     print('updated members dict')
     return resdict
