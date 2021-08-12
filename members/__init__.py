@@ -9,7 +9,7 @@ API = tweepy.API(auth)
 def main():
     if os.getenv('MEMBER_FETCHED'):
         if float(os.getenv('MEMBER_FETCHED')) + 900 >= time.time():
-            resdict = os.getenv('MEMBER_RESDICT')
+            resdict = dict(os.getenv('MEMBER_RESDICT'))
             return resdict
     resdict = {'users': []}
     for user in tweepy.Cursor(
