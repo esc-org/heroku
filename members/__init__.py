@@ -19,7 +19,7 @@ def main():
         d = {
             'name': user.name,
             'screen_name': user.screen_name,
-            'image': user.profile_image_url.replace('_normal', ''),
+            'image': user.profile_image_url_https.replace('_normal', ''),
             'description': user.description,
         }
         resdict['users'].append(d)
